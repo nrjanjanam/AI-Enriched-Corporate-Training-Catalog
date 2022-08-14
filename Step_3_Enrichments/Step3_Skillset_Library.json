@@ -1,0 +1,68 @@
+{
+  "@odata.context": "https://enriched-course-catalog-search.search.windows.net/$metadata#skillsets/$entity",
+  "@odata.etag": "\"0x8DA7DC66E98C151\"",
+  "name": "papers-skillset",
+  "description": "Skillset created from the portal. skillsetName: papers-skillset; contentField: metadata_title; enrichmentGranularity: document; knowledgeStoreStorageAccount: ;",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+      "name": "#1",
+      "description": null,
+      "context": "/document/metadata_title",
+      "defaultLanguageCode": "en",
+      "maxKeyPhraseCount": null,
+      "modelVersion": null,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/metadata_title"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "keyPhrases",
+          "targetName": "keyphrases"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+      "name": "#2",
+      "description": "Springer Lookup for Paper Details",
+      "context": "/document",
+      "uri": "https://course-function-app.azurewebsites.net/api/SpringerLookup?code=qRu_VsyYGmoi5wG6ISA5c-BlqoOo6BMTPx4ECTQRaF0yAzFuS3mfmw==",
+      "httpMethod": "POST",
+      "timeout": "PT30S",
+      "batchSize": 10,
+      "degreeOfParallelism": 1,
+      "inputs": [
+        {
+          "name": "ArticleName",
+          "source": "/document/metadata_title"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "publicationName",
+          "targetName": "publicationName"
+        },
+        {
+          "name": "publisher",
+          "targetName": "publisher"
+        },
+        {
+          "name": "doi",
+          "targetName": "doi"
+        },
+        {
+          "name": "publicationDate",
+          "targetName": "publicationDate"
+        }
+      ],
+      "httpHeaders": {}
+    }
+  ],
+  "cognitiveServices": null,
+  "knowledgeStore": null,
+  "encryptionKey": null
+}
