@@ -1,0 +1,31 @@
+{
+  "@odata.context": "https://enriched-course-catalog-search.search.windows.net/$metadata#indexers/$entity",
+  "@odata.etag": "\"0x8DA7D701651EFF7\"",
+  "name": "courses-indexer",
+  "description": "",
+  "dataSourceName": "courses",
+  "skillsetName": "courses-skillset",
+  "targetIndexName": "courses-index",
+  "disabled": null,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": 0,
+    "maxFailedItemsPerBatch": 0,
+    "base64EncodeKeys": false,
+    "configuration": {}
+  },
+  "fieldMappings": [],
+  "outputFieldMappings": [
+    {
+      "sourceFieldName": "/document/description/keyphrases",
+      "targetFieldName": "keyphrases"
+    },
+    {
+      "sourceFieldName": "/document/instructor/entities",
+      "targetFieldName": "entities"
+    }
+  ],
+  "cache": null,
+  "encryptionKey": null
+}
