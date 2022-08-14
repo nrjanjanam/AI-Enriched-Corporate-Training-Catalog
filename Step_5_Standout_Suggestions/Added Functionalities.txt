@@ -1,0 +1,5 @@
+1. Added a selectCourses Field that is true for courses that have Average Rating more than 4.6 and Duration of course more than 2 months.
+
+2. Made instructor of course sortable to allow users to sort the instructors alphabetically/ reverse alphabetically.
+
+Appropriate index, skillset and indexer files for courses data has been uploaded.
